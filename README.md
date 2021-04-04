@@ -4,6 +4,42 @@ My site where I toss some ideas.
 Currently working on learning Go. I may write done some notes here.
 I will aslo be attempting LeetCode problems.
 
+# April 3, 2021
+I decided to tackle the Reverse Integer problem on LeetCode today so here is my final solution to it:
+
+    class Solution {
+        public int reverse(int x) {
+    
+            boolean isNegative = (x < 0) ? true : false;
+            x = Math.abs(x);
+            int powersOfTen = -1;
+            for (int i = x; i > 0; i /= 10) {
+                powersOfTen++;
+            }
+
+            int trueResult = 0;
+            long result = 0;
+            for (int i = x; i > 0; i /= 10) {
+                result += Math.pow(10, powersOfTen) * (i % 10);
+                trueResult += Math.pow(10, powersOfTen) * (i % 10);
+                powersOfTen--;
+            }
+
+            if (result > Integer.MAX_VALUE) {
+                return 0;
+            }
+            if (isNegative) {
+                if (-1 * result < Integer.MIN_VALUE) {
+                    return 0;
+                }
+                return -1 * trueResult;
+            }
+            return trueResult;
+        }
+    }
+
+This was just as fast as the solution they have posted and uses about the same amount memory (a little less actually) according to their tests. Although, I did enjoy reading on why they went with their solution since it uses knowledge on when an integer will overflow and as such does not need to use a long to determine if the integer is outside its allowed range.
+
 # March 31, 2021
 
 Here is my final solution to the Add Two Numbers problem:
